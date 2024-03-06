@@ -46,12 +46,14 @@ Project title: Critical area prediction in train stations with DEtection TRansfo
 In this work, we propose a deep learning-based approach to realistically and instantly predict critical areas in the design of train station platforms. These critical areas, represented by rectangles in the platform layout, 
 may form during an evacuation process, when many passengers try to reach the exits all at once, thus creating dangerous overcrowding situations on the platform that may even turn into stampedes and mass panic. 
 Therefore, we aim at supporting particularly the early stages of the train station design project by proposing a methodology that utilizes an object detector (namely an adapted version of DETR) to interactively assess platform floorplans 
-whenever a new design variant emerges. This is conventionally done with pedestrian simulators which incorporate runtimes of minutes or even hours (depending on the building complexity), as well as manual export and conversion steps. 
+whenever a new design variant emerges. This is conventionally done with pedestrian simulators which entail runtimes of minutes or even hours (depending on the building complexity), as well as several manual export and conversion steps. 
 Consequently, it is simply unfeasible to interrogate every single building design variant that emerges in the design and planning process. 
 
-In contrast, the neural network - trained on a synthetic dataset - can deliver predictions in real-time and interactively if connected to the BIM model. However, to reproduce simulation results, it is necessary to not only use the 
-floorplans as inputs to the neural network, but also incorporate simulator information (e.g. number of agents, number of stairs and escalators, agent velocity distribution, etc.) as essential components. In this repository, we showcase
-some potential input options that emulate simulator results to support the design and planning of train station platforms.
+In contrast, the neural network - trained on a synthetic dataset - can deliver predictions in real-time and interactively if connected to the BIM model as depicted in Figure 1. However, to reproduce simulation results, it is necessary to not only use the 
+floorplans as inputs to the neural network, but also consider simulator information (e.g. number of agents, number of stairs and escalators, agent velocity distribution, etc.) as essential components. In this repository, we showcase
+some potential input options to emulate simulator results, supporting the design and planning of train station platforms.
+
+![Figure 1: Methodology of our approach.](pics/methodology.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -83,12 +85,12 @@ Once you clone the repository, make sure the folder structure matches the direct
 
 📦CriticalAreaDetection  
 ┣ 📂checkpoints  
-┣ 📂ExampleDataset  
+┣ 📂ExampleDataset
 ┃ ┣ 📂inputs
 ┃ ┣ 📂targets
 ┣ 📂models
 ┃ ┣ 📜Detr_custom.py
-┣ 📂ExampleDataset 
+┣ 📂ExampleDataset
 ┃ ┣ 📂inputs
 ┃ ┣ 📂targets
 ┣ 📜helper.py
@@ -134,13 +136,16 @@ conda install --file requirements.txt
 
 ## Usage
 
-We provide an example dataset of fifty samples to showcase the synthetic platform dataset (incorporating critical areas), the training procedure and the neural network architecture.
-The filenames of the input images describe the platform setup, containing the following information (in order):
+#### Synthetic Dataset
+We provide an example dataset of fifty samples to showcase the synthetic platform dataset, comprising the colored floorplan images of the platforms (exported from a parametric BIM model) and the resulting critical 
+areas as targets. The filenames of the input images describe the platform and simulation setup, containing the following information (in order):
 
 Number of tracks (**T**), number of agents (**A**), obstacle presence (**C**) (0=false, 2=true), number of central escalators (**E**), width of central stairs (**S**) (in meters), 
 orientation of central ascent units (**O**) (0=outwards, 1=inwards), number of escalators on the sides (**ES**) and width of the stairs on the sides (**SS**) (in meters). Additionally,
 **VC** and **VS** denote the general presence of any vertical ascent units (meaning escalators and stairs) either in the center, or sides, or both.
 
+
+#### Neural Network Architecture
 All possible configurations are incorporated in the main.py file, including training, inference, hyperparameter choice, etc. Therfore, to choose a specific configuration, it must be specified in 
 CONFIG and TRAIN_CONFIG dictionaries. Specifically, the adaption of the DETR is based on different input options to the neural network, where each option provides the (augmented) input image of
 the floorplan as input. Additionally, simulator information is provided as well in the following way:
@@ -154,20 +159,11 @@ and provide those embeddings before or after the encoder, respectively, during t
 
 Natually, some of these options are quite use case-specific, but we aim at underscoring the vast possibilities and versatility of adding supplementary information to enhance the predictive capabilities of the network.
 
-## Documentation
-
-<div id = "docs"></div>
-
-_Details of all scripts and classes can be found in
-[Documentation Link Placeholder](https://github.com/patrickberggold/PedSimAutomation)._
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- CONTACT -->
 
 ## Contact
 
-If you have any questions with regards to our research or the usage of this project, please don't hesitate to contact us via e-mail. We will update more information regarding the usage and training of the network in the next few days.
+If you have any questions with regards to our research or the usage of this project, please don't hesitate to contact me via e-mail.
 
 Patrick Berggold - patrick.berggold@tum.de
 

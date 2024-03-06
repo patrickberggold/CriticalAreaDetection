@@ -1,4 +1,5 @@
-torch --index-url  https://download.pytorch.org/whl/cu118
+--index-url  https://download.pytorch.org/whl/cu118
+torch
 torchvision
 torchaudio
 pytorch-lightning

@@ -1,0 +1,9 @@
+torch --index-url  https://download.pytorch.org/whl/cu118
+torchvision
+torchaudio
+pytorch-lightning
+transformers == 4.28.0
+matplotlib
+scikit-learn
+albumentations
+timm

@@ -11,10 +11,6 @@
     <br />
     Patrick Berggold
     <br />
-    <a href=#docs><strong>Explore the docs »</strong></a>
-    <!-- <strong>[Explore the docs »](#documentation)</strong> -->
-    <br />
-    <br />
     <a href="mailto:patrick.berggold@tum.de">Report Bug</a>
     ·
     <a href="mailto:patrick.berggold@tum.de">Request Feature</a>
@@ -32,7 +28,6 @@
       <a href="#getting-started">Getting Started</a>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#docs">Documentation</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -90,9 +85,7 @@ Once you clone the repository, make sure the folder structure matches the direct
 ┃ ┣ 📂targets  
 ┣ 📂models  
 ┃ ┣ 📜Detr_custom.py  
-┣ 📂ExampleDataset  
-┃ ┣ 📂inputs  
-┃ ┣ 📂targets  
+┣ 📂pics  
 ┣ 📜helper.py  
 ┣ 📜main.py  
 ┣ 📜metrics_calc.py  

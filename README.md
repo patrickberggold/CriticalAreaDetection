@@ -53,7 +53,7 @@ In contrast, the neural network - trained on a synthetic dataset - can deliver p
 floorplans as inputs to the neural network, but also consider simulator information (e.g. number of agents, number of stairs and escalators, agent velocity distribution, etc.) as essential components. In this repository, we showcase
 some potential input options to emulate simulator results, supporting the design and planning of train station platforms.
 
-![Figure 1: Methodology of our approach.](main/pics/methodology.png)
+![Figure 1: Methodology of our approach.](/pics/methodology.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

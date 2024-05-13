@@ -1,10 +1,10 @@
---index-url  https://download.pytorch.org/whl/cu118
-torch
-torchvision
-torchaudio
 pytorch-lightning
+--extra-index-url  https://download.pytorch.org/whl/cu118
+torch == 2.1.2
+torchvision == 0.16.2
+torchaudio == 2.1.2
+albumentations
+timm
 transformers == 4.28.0
 matplotlib
 scikit-learn
-albumentations
-timm

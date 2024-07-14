@@ -52,16 +52,16 @@ class Detr_custom(DetrForObjectDetection):
             self.num_extra_queries = 100
             if not self.additional_queries.endswith('+'):
                 self.central_ascent_embeddings, self.sides_ascent_embeddings = None, None
-                self.agent_embeddings = torch.nn.Embedding(3, self.embed_dim)
+                self.simulation_embeddings = torch.nn.Embedding(3, self.embed_dim)
             else:
-                self.agent_embeddings = torch.nn.Embedding(3, self.embed_dim) 
+                self.simulation_embeddings = torch.nn.Embedding(3, self.embed_dim) 
                 self.central_ascent_embeddings = torch.nn.Embedding(7, self.embed_dim) # additional 7 options (E=1/2/3 + S=0/2.4 + None) both for vertical ascent in the center and from the sides
                 self.sides_ascent_embeddings = torch.nn.Embedding(7, self.embed_dim)
                 self.obstacle_presence_embeddings = torch.nn.Embedding(2, self.embed_dim)
                 torch.nn.init.normal_(self.central_ascent_embeddings.weight.data, mean=0.0, std=self.config.init_std)
                 torch.nn.init.normal_(self.sides_ascent_embeddings.weight.data, mean=0.0, std=self.config.init_std)
                 torch.nn.init.normal_(self.obstacle_presence_embeddings.weight.data, mean=0.0, std=self.config.init_std)
-            torch.nn.init.normal_(self.agent_embeddings.weight.data, mean=0.0, std=self.config.init_std)
+            torch.nn.init.normal_(self.simulation_embeddings.weight.data, mean=0.0, std=self.config.init_std)
             self.model.backbone.position_embedding = DetrSinePositionEmbedding_custom(self.config.d_model // 2, normalize=True, num_extra_queries=self.num_extra_queries)
         else:
             self.num_extra_queries = None
@@ -303,10 +303,10 @@ class Detr_custom(DetrForObjectDetection):
             agent_ids, central_ids, sides_ids, obstacle_ids = torch.split(information_ids, 1, dim=1)
             # before_encoder and after_encoder
             if self.central_ascent_embeddings is None and self.sides_ascent_embeddings is None:
-                simulation_embeddings = self.agent_embeddings(agent_ids).repeat(1, self.num_extra_queries, 1)
+                simulation_embeddings = self.simulation_embeddings(agent_ids).repeat(1, self.num_extra_queries, 1)
             # before_encoder+ and after_encoder+
             elif self.central_ascent_embeddings is not None and self.sides_ascent_embeddings is not None:
-                agent_embeddings = self.agent_embeddings(agent_ids).repeat(1, self.num_extra_queries//4, 1)
+                agent_embeddings = self.simulation_embeddings(agent_ids).repeat(1, self.num_extra_queries//4, 1)
                 central_ascent_embeddings = self.central_ascent_embeddings(central_ids).repeat(1, self.num_extra_queries//4, 1)
                 sides_ascent_embeddings = self.sides_ascent_embeddings(sides_ids).repeat(1, self.num_extra_queries//4, 1)
                 obstacle_presence_embeddings = self.obstacle_presence_embeddings(obstacle_ids).repeat(1, self.num_extra_queries//4, 1)

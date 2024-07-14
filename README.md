@@ -79,7 +79,9 @@ git clone https://github.com/patrickberggold/CriticalAreaDetection
 Once you clone the repository, make sure the folder structure matches the directory tree shown below.
 
 📦CriticalAreaDetection  
-┣ 📂checkpoints  
+┣ 📂Dynamo
+┃ ┣ 📜U9-TrackLine_3.4.04_wForwardPass_2024.dyn  
+┃ ┣ 📜U9-TrackLine_3.4.04.dyn  
 ┣ 📂ExampleDataset  
 ┃ ┣ 📂inputs  
 ┃ ┣ 📂targets  

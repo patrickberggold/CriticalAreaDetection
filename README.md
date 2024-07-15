@@ -79,7 +79,7 @@ git clone https://github.com/patrickberggold/CriticalAreaDetection
 Once you clone the repository, make sure the folder structure matches the directory tree shown below.
 
 📦CriticalAreaDetection  
-┣ 📂Dynamo
+┣ 📂Dynamo  
 ┃ ┣ 📜U9-TrackLine_3.4.04_wForwardPass_2024.dyn  
 ┃ ┣ 📜U9-TrackLine_3.4.04.dyn  
 ┣ 📂ExampleDataset  
@@ -99,7 +99,7 @@ Once you clone the repository, make sure the folder structure matches the direct
 
 ## Initial Setup
 
-#### Python version
+#### Neural Network setup
 
 <!-- 3.10.13 -->
 Before using this script, make sure that you download and install Python 3.10 [here](https://www.python.org/downloads/). Afterwards, you need to create a virtual Python environment using the command below.
@@ -125,6 +125,23 @@ pip install -r requirements.txt
 ```
 conda install --file requirements.txt
 ```
+
+### Revit and Dynamo Installation
+
+Initially, we created the parametric BIM model within Revit 2022, but the script is now updated to run for Revit 2024, too. 
+For installation, visit Autodesk's webpage and download the installer. 
+As a student, you are granted free access to Autodesk's products [here](https://www.autodesk.de/education/edu-software/overview).
+We recommend the installation of Revit 2024 to avoid any obsolescence issues. 
+Furthermore, the Dynamo version that comes along with it seems to have improved on reliability and runs Python blocks in version 3.9, which is compatible to our deep learning pipeline. 
+
+### Dynamo Setup
+
+To implement a neural network forward pass in Dynamo, the corresponding Python packages (such as PyTorch, NumPy, etc.) must be linked somehow.
+Initially, we appended the corresponding virtual environment to the Python path within the Dynamo blocks, but this regularly resulted in packages not being found, or missing links to dynamic libraries, etc. 
+
+In our experience, the package installation works more reliably when following the guide on [customizing Dynamo's Python 3 installation](https://github.com/DynamoDS/Dynamo/wiki/Customizing-Dynamo%27s-Python-3-installation). 
+In essence, this involves the installation of `pip` into Dynamo's Python embeddable package that enables us to subsequently install PyTorch, NumPy, etc. Specifically, when following this guide, we simply run `.\Scripts\pip.exe install -r requirements.txt` to install our packages from the corresponding local application data folder (in our case from `python-3.9.12-embed-amd64`). 
+
 
 <!-- USAGE EXAMPLES -->
 
@@ -155,6 +172,8 @@ Natually, some of these options are quite use case-specific, but we aim at under
 
 ![Figure 2: The neural network architecture, utilizing a customized version of the DETR.](/pics/detr_custom.PNG)
 *Figure 2: The neural network architecture, utilizing a customized version of DETR.*
+
+
 
 <!-- CONTACT -->
 

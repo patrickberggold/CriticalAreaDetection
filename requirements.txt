@@ -8,3 +8,4 @@ timm
 transformers == 4.28.0
 matplotlib
 scikit-learn
+opencv-python

@@ -44,11 +44,26 @@ Therefore, we aim at supporting particularly the early stages of the train stati
 Consequently, it is simply unfeasible to interrogate every single building design variant that emerges in the design and planning process. 
 
 In contrast, the neural network - trained on a synthetic dataset - can deliver predictions in real-time and interactively if connected to the BIM model as depicted in Figure 1. However, to reproduce simulation results, it is necessary to not only use the 
-floorplans as inputs to the neural network, but also consider simulator information (e.g. number of agents, number of stairs and escalators, agent velocity distribution, etc.) as essential components. In this repository, we showcase
-some potential input options to emulate simulator results, supporting the design and planning of train station platforms.
+floorplans as inputs to the neural network, but also consider simulator information (e.g. number of agents, number of stairs and escalators, agent velocity distribution, etc.) as essential components.
 
 ![Figure 1: Methodology of our approach.](/pics/methodology.PNG)
 *Figure 1: Methodology of our approach.*
+
+In our work, we investigate several neural network options to incorporate supplementary simulator inputs. 
+Subsequently image-based and simulator-based features must be merged to predict critical areas in the layout, necessitating a customization of DETR, as displayed in Figure 2.
+Specifically, we provide the number of agents per wagon as supplementary input, exploring different options:
+
+* The **vanilla_imgAugm** option varies the brightness of each color in the input image depending on the number of agents.
+* Options **before_encoder** and **after_encoder** encode the number of agents as a specified number of learnable embeddings, and provide those embeddings before or after the encoder, respectively, 
+during the forward pass.
+* Options **before_encoder+** and **after_encoder+** encode the number of agents, the number of vertical ascent units on the sides and in the center and boolean obstacle presence as a specified number of learnable embeddings,
+and provide those embeddings before or after the encoder, respectively, during the forward pass.
+* On top, the **vanilla** option performs a forward pass similar to the original DETR implementation for comparison.
+
+Natually, some of these options are quite use case-specific, but we aim at underscoring the vast possibilities and versatility of adding supplementary information to enhance the predictive capabilities of the network.
+
+![Figure 2: The neural network architecture, utilizing a customized version of the DETR.](/pics/detr_custom.PNG)
+*Figure 2: The neural network architecture, utilizing a customized version of DETR.*
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -146,34 +161,26 @@ In essence, this involves the installation of `pip` into Dynamo's Python embedda
 <!-- USAGE EXAMPLES -->
 
 ## Usage
-
-### Synthetic Dataset
-We provide an example dataset of fifty samples to showcase the synthetic platform dataset, comprising the colored floorplan images of the platforms (exported from the parametric BIM model displayed in Figure 1) as inputs 
-and the resulting critical areas as targets. The filenames of the input images describe the platform and simulation setup, containing the following information (in order):
+<!-- DELETE FROM HERE -->
+### Dataset and Training
+We provide an [example dataset](/ExampleDataset) of fifty samples to showcase the synthetic platform dataset, comprising the colored floorplan images of the platforms (exported from the parametric BIM model displayed in Figure 1) as inputs 
+and the resulting critical areas as targets. 
+The filenames of the input images describe the platform and simulation setup, containing the following information (in order):
 
 Number of tracks (**T**), number of agents (**A**), obstacle presence (**C**) (0=false, 2=true), number of central escalators (**E**), width of central stairs (**S**) (in meters), 
 orientation of central ascent units (**O**) (0=outwards, 1=inwards), number of escalators on the sides (**ES**) and width of the stairs on the sides (**SS**) (in meters). Additionally,
 **VC** and **VS** denote the general presence of any vertical ascent units (meaning escalators and stairs) either in the center, or sides, or both.
 
 
-### Neural Network Architecture
-All possible configurations are incorporated in the main.py file, including training, inference, hyperparameter choice, etc. Therefore, to choose a specific configuration, it must be specified in 
-CONFIG and TRAIN_CONFIG dictionaries. In the forward pass, the (augmented) floorplan image of the platform is provided as input. Additionally, supplementary simulator information (e.g. the number of agents per wagon) is used as well,
-which necessitates a customization of DETR, as displayed in Figure 2. Specifically, simulator information is provided in the following way:
-
-* The **vanilla** option performs a forward pass similar to the original DETR implementation.
-* The **vanilla_imgAugm** option varies the brightness of each color in the input image depending on the number of agents.
-* Options **before_encoder** and **after_encoder** encode the number of agents as a specified number of learnable embeddings, and provide those embeddings before or after the encoder, respectively, 
-during the forward pass.
-* Options **before_encoder+** and **after_encoder+** encode the number of agents, the number of vertical ascent units on the sides and in the center and boolean obstacle presence as a specified number of learnable embeddings,
-and provide those embeddings before or after the encoder, respectively, during the forward pass.
-
-Natually, some of these options are quite use case-specific, but we aim at underscoring the vast possibilities and versatility of adding supplementary information to enhance the predictive capabilities of the network.
-
-![Figure 2: The neural network architecture, utilizing a customized version of the DETR.](/pics/detr_custom.PNG)
-*Figure 2: The neural network architecture, utilizing a customized version of DETR.*
+Regarding network training, all possible configurations, hyperparameters, etc. are specified in the `main.py` file via the `CONFIG` and `TRAIN_CONFIG` dictionaries.
+In the forward pass, the (augmented) floorplan image of the platform, as well as supplementary simulator information (e.g. the number of agents per wagon), are provided as input.
+We use the Adam optimizer and the Hungarian loss function to train our neural network on a dataset of several thousand samples.
+After training, the neural network checkpoint may be used to make predictions directly from Dynamo.
 
 
+### The Dynamo script
+
+Open the Dynamo script (the 2024 version) within Revit. 
 
 <!-- CONTACT -->
 

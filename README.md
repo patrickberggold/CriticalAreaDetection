@@ -180,7 +180,16 @@ After training, the neural network checkpoint may be used to make predictions di
 
 ### The Dynamo script
 
-Open the Dynamo script (the 2024 version) within Revit. 
+Open the Revit file, and then open the Dynamo script (the 2024 version) within Revit. 
+All required imports have been added to the associated Python blocks, which should not cause any issues if the packages have been installed properly, as explained above.
+Our script can generate the train station model from multiple input parameters, some of which have been used to generate the dataset, such escalator orientation, number of tracks, etc. 
+In contrast, the majority of input parameters remains constant in the dataset, but may changed by the user as well, including various elevator position, column spacing, top level parameters, or Revit family types, among others. 
+Depending on the input parameter combination, current instance is deleted, and a new model is created.
+Finally, our script allows for different export options, encompassing colored floorplan images and IFC files (which may be required as input to pedestrian simulators). 
+
+Moreover, the script can also predict critical areas (depending on dataset and training).  
+To do so, set the Boolean values of the `NN_ForwardPass` and `Color Export` blocks to `True`, and adjust the paths to store the floorplan image and the prediction image. 
+So far, storing the images is required for visualization inside Dynamo, as we have not found a way yet to visualize directly, without intermediate storing.
 
 <!-- CONTACT -->
 

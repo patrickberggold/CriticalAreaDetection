@@ -110,7 +110,8 @@ Once you clone the repository, make sure the folder structure matches the direct
 ┣ 📜ObjDetDataset.py  
 ┣ 📜ObjDetModule.py  
 ┣ 📜README.md  
-┗ 📜requirements.txt
+┣ 📜requirements.txt  
+┗ 📜.gitignore
 
 ## Initial Setup
 
@@ -190,6 +191,8 @@ Finally, our script allows for different export options, encompassing colored fl
 Moreover, the script can also predict critical areas (depending on dataset and training).  
 To do so, set the Boolean values of the `NN_ForwardPass` and `Color Export` blocks to `True`, and adjust the paths to store the floorplan image and the prediction image. 
 So far, storing the images is required for visualization inside Dynamo, as we have not found a way yet to visualize directly, without intermediate storing.
+
+**Update**: Currently, there is still a small bug in the Dynamo script due to some updates in the Revit API. I will fix those issues in the following days. For more information, feel free to contact me!
 
 <!-- CONTACT -->
 

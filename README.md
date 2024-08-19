@@ -189,7 +189,7 @@ Depending on the input parameter combination, current instance is deleted, and a
 Finally, our script allows for different export options, encompassing colored floorplan images and IFC files (which may be required as input to pedestrian simulators). 
 
 Moreover, the script can also predict critical areas (depending on dataset and training).  
-To do so, select one of the three options to run the script, including `Create new model only`, `Create new model + colored Floorplan export` and `Create new model + NN prediction`, and adjust the paths to store the floorplan image and the prediction image. 
+To do so, select one of the three options to run the script, including `Create new model only`, `Create new model + colored floorplan export` and `Create new model + NN prediction`, and adjust the paths to store the floorplan image and the prediction image. 
 So far, storing the images is required for visualization inside Dynamo, as we have not found a way yet to visualize directly, without intermediate storing.
 
 <!-- CONTACT -->

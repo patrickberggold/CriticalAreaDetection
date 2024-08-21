@@ -192,7 +192,7 @@ Moreover, the script can also predict critical areas (depending on dataset and t
 To do so, select one of the three options to run the script, including `Create new model only`, `Create new model + colored floorplan export` and `Create new model + NN prediction`, and adjust the paths to store the floorplan image and the prediction image. 
 So far, storing the images is required for visualization inside Dynamo, as we have not found a way yet to visualize directly, without intermediate storing.
 
-![Watch the video](/demo/gif_gt.gif)
+![Watch the video](/demo/gitDemo.gif)
 
 <!-- CONTACT -->
 

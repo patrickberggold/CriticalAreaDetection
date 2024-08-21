@@ -202,7 +202,7 @@ If you have any questions with regards to our research or the usage of this proj
 
 Patrick Berggold - patrick.berggold@tum.de
 
-Project Link: [https://github.com/patrickberggold/PedSimAutomation](https://github.com/patrickberggold/PedSimAutomation)
+Project Link: [https://github.com/patrickberggold/CriticalAreaDetection](https://github.com/patrickberggold/CriticalAreaDetection)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
